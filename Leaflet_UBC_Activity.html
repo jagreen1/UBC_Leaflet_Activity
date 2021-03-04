@@ -101,8 +101,8 @@
     
 
     function onEachFeature(feature, layer) {
-      if (feature.properties && feature.properties.CONSTRUCTION_TYPE) {
-        layer.bindPopup(feature.properties.CONSTRUCTION_TYPE);
+      if (feature.properties && feature.properties.CONSTRUCTION_TYPE && feature.properties.NAME && feature.properties.BLDG_ID) {
+        layer.bindPopup("<p class='info header'>"+ "<b>" + 'Building : ' + feature.properties.NAME + "</b>" + "</br>" + 'Material: ' + feature.properties.CONSTRUCTION_TYPE + "</br>" + 'Building ID: ' + feature.properties.BLDG_ID + "</p>");
         layer.on({
           mouseover: highlightFeature,
           mouseout: resetHighlight,
