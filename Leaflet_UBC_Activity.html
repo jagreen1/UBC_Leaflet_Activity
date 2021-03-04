@@ -76,6 +76,25 @@
     }
     
     
+    function highlightFeature(e) {
+    var layer = e.target;
+
+    layer.setStyle({
+        weight: 5,
+        color: '#00FFFF',
+        dashArray: '',
+        fillOpacity: 0.7
+    });
+
+    if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
+        layer.bringToFront();
+    }
+  }
+    
+    function resetHighlight(e) {
+      geojson.resetStyle(e.target);
+    }
+    
     function zoomToFeature(e) {
       map.fitBounds(e.target.getBounds());
     }
@@ -85,6 +104,8 @@
       if (feature.properties && feature.properties.CONSTRUCTION_TYPE) {
         layer.bindPopup(feature.properties.CONSTRUCTION_TYPE);
         layer.on({
+          mouseover: highlightFeature,
+          mouseout: resetHighlight,
           click: zoomToFeature
       });
     }
